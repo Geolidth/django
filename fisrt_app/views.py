@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
+from django.urls import reverse
 
 articles = {
     'sports':'Sports Page',
@@ -14,8 +15,9 @@ def news_view(request, topic):
     except:
         raise Http404('404 GENERIC ERROR')
 
-def num_page_view(reques,num_page):
+def num_page_view(request,num_page):
     topics_list = list(articles.keys())
     topic = topics_list[num_page]
+    
 
-    return HttpResponseRedirect(topic)
+    return HttpResponseRedirect(reverse('topic-page',args=[topic]))
